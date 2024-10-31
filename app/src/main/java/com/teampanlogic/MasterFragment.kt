@@ -1,70 +1,60 @@
-package com.panlogicsolutionteam
+package com.teampanlogic
 
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
-import androidx.core.view.GravityCompat
-import androidx.drawerlayout.widget.DrawerLayout
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
-import com.google.android.material.navigation.NavigationView
-import com.teampanlogic.ProfileFragment
-import com.teampanlogic.R
-import com.teampanlogic.RazorPayFragment
-import com.teampanlogic.RoomDatabaseFragment
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.teampanlogic.MasterScreen.AccountFragment
+import com.teampanlogic.MasterScreen.AdminPannelFragment
+import com.teampanlogic.MasterScreen.HomeFragment
+import com.teampanlogic.MasterScreen.NotificationFragment
+import com.teampanlogic.MasterScreen.SettingFragment
 
 class MasterFragment : Fragment() {
 
-    private lateinit var drawerLayout: DrawerLayout
-    private lateinit var navigationView: NavigationView
-    private lateinit var idConcept: ImageView
-
+    private lateinit var BottomNavigationView: BottomNavigationView
+    private lateinit var Toolbar: Toolbar
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_master, container, false)
-
-        // Initialize DrawerLayout and NavigationView
-        drawerLayout = view.findViewById(R.id.drawer_layout)
-        navigationView = view.findViewById(R.id.navigationView)
-        idConcept = view.findViewById(R.id.idConcept)
-
-        // Set status bar color from a color resource
         activity?.window?.statusBarColor = ContextCompat.getColor(requireContext(), R.color.logo_color_ii)
-
-        // Find the toolbar and set it as the ActionBar
-        val toolbar: androidx.appcompat.widget.Toolbar = view.findViewById(R.id.my_toolbar)
-        (activity as AppCompatActivity).setSupportActionBar(toolbar)
-        (activity as AppCompatActivity).supportActionBar?.title = "My Team"
-
-        // Handle drawer toggle
-        idConcept.setOnClickListener {
-            if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
-                drawerLayout.closeDrawer(GravityCompat.START)
-                Toast.makeText(context, "Drawer Closed", Toast.LENGTH_SHORT).show()
-            } else {
-                drawerLayout.openDrawer(GravityCompat.START)
-                Toast.makeText(context, "Drawer Opened", Toast.LENGTH_SHORT).show()
+        val view= inflater.inflate(R.layout.fragment_master, container, false)
+        BottomNavigationView= view.findViewById(R.id.bottom_menu)
+        Toolbar= view.findViewById(R.id.toolbar)
+        // Set up toolbar
+        Toolbar.title = "Home"
+        Toolbar.setTitleTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+        Toolbar.setOnMenuItemClickListener { item ->
+            var fragment: Fragment? = null
+            when (item.itemId) {
+                R.id.bottom_navigation_profile -> fragment = AccountFragment()
+                R.id.toolbar_menu_project -> fragment = SettingFragment()
             }
+            fragment?.let {
+                val transaction: FragmentTransaction = parentFragmentManager.beginTransaction()
+                transaction.replace(R.id.fragment_container, it)
+                transaction.addToBackStack(null)
+                transaction.commit()
+            }
+            true
         }
-
-        // Set up navigation item listener
-        navigationView.setNavigationItemSelectedListener { menuItem ->
-            menuItem.isChecked = true
-            drawerLayout.closeDrawers()
-
-            val fragment = when (menuItem.itemId) {
-                R.id.nav_home -> this // Current fragment
-                R.id.nav_profile -> ProfileFragment()
-                R.id.nav_roomdatabase -> RoomDatabaseFragment()
-                R.id.nav_Razorpay -> RazorPayFragment()
+        // Set up fragment
+        loadFragment(HomeFragment())
+        // Set up bottom navigation listener
+        BottomNavigationView.setOnItemSelectedListener { item ->
+            val fragment = when (item.itemId) {
+                R.id.bottom_navigation_home -> HomeFragment() // No need to reload HomeFragment since it's already loaded initially
+                R.id.bottom_navigation_profile -> AccountFragment()
+                R.id.bottom_navigation_settings -> SettingFragment()
+                R.id.bottom_navigation_notification -> NotificationFragment()
+                R.id.bottom_navigation_admin_pannel -> AdminPannelFragment()
                 else -> {
                     Toast.makeText(context, "Feature not implemented", Toast.LENGTH_SHORT).show()
                     null
@@ -74,7 +64,7 @@ class MasterFragment : Fragment() {
             // Replace fragment if selected
             fragment?.let {
                 val transaction: FragmentTransaction = parentFragmentManager.beginTransaction()
-                transaction.replace(R.id.fragment_container, it)
+                transaction.replace(R.id.fragment_master, it)
                 transaction.addToBackStack(null)
                 transaction.commit()
             }
@@ -82,11 +72,16 @@ class MasterFragment : Fragment() {
             true
         }
 
+
         return view
     }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        drawerLayout.closeDrawers() // Ensures the drawer is closed when the Fragment is destroyed
+    // Function to load the fragment
+    private fun loadFragment(fragment: Fragment) {
+        val transaction: FragmentTransaction = parentFragmentManager.beginTransaction()
+        transaction.replace(R.id.fragment_master, fragment)
+        transaction.addToBackStack(null)
+        transaction.commit()
     }
+
+
 }
