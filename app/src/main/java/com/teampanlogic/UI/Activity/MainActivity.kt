@@ -1,8 +1,10 @@
-package com.teampanlogic
+package com.teampanlogic.UI.Activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
+import com.teampanlogic.MasterFragment
+import com.teampanlogic.R
 
 class MainActivity : AppCompatActivity() {
     private lateinit var fragmentManager: FragmentManager
@@ -20,4 +22,6 @@ class MainActivity : AppCompatActivity() {
                 .commit()
         }
     }
+
+
 }
