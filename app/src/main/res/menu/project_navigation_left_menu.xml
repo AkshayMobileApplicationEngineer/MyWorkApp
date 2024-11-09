@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <group
+        android:id="@+id/project_navigation_group"
+        android:icon="@drawable/ic_app"
+        android:title="Group" >
+        <item
+            android:id="@+id/project_navigation_firebase"
+            android:icon="@drawable/ic_firebase"
+            android:title="Firebase" />
+
+        <item
+            android:id="@+id/project_navigation_room_database"
+            android:icon="@drawable/ic_database"
+            android:title="Room Database" />
+        <item android:id="@+id/project_navigation_sqllite"
+            android:icon="@drawable/ic_sqlite"
+            android:title="SQLlite" />
+    </group>
+
+</menu>
