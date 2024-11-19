@@ -50,6 +50,7 @@ class MasterFragment : Fragment() {
                 R.id.toolbar_menu_appsflyer->fragment=AppsFlyerFragment()
                 R.id.toolbar_menu_mode -> setThemeForMode(item)
                 R.id.toolbar_menu_lightmode -> setThemeForMode(item)
+                R.id.toolbar_menu_ai_chat->fragment=ChatFragment()
                 else -> Toast.makeText(context, "Feature not implemented", Toast.LENGTH_SHORT).show()
             }
             fragment?.let {

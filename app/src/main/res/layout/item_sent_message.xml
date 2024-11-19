@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="8dp"
+    >
+
+    <!-- Message Bubble -->
+    <LinearLayout
+        android:id="@+id/message_bubble"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/sent_message_background"
+        android:padding="10dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="50dp">
+
+        <!-- Message Text -->
+        <TextView
+            android:id="@+id/message_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="git clone"
+            android:textSize="16sp"
+            android:textColor="#FFFFFF"
+            />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/message_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="14:16"
+                android:textSize="12sp"
+                android:textColor="#DDDDDD"
+                android:layout_marginTop="4dp" />
+
+            <!-- Double Tick Icon -->
+            <ImageView
+                android:id="@+id/message_status"
+                android:layout_gravity="center_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_double_tick"
+                android:layout_marginStart="4dp"
+                app:tint="#64B5F6" />
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>
