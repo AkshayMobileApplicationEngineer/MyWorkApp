@@ -1,0 +1,33 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_theme"
+        android:title="plus"
+        android:visible="true"
+        android:icon="@drawable/ic_mode"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/action_theme_12"
+        android:title="plus"
+        android:visible="false"
+        android:icon="@drawable/ic_night"
+        app:showAsAction="always" />
+
+
+
+    <item
+        android:id="@+id/action_plus"
+        android:title="plus"
+        android:icon="@drawable/ic_add"
+        app:showAsAction="always" />
+
+
+    <item
+        android:id="@+id/action_search"
+        android:title="Search"
+        android:icon="@drawable/ic_search"
+        app:showAsAction="always" />
+
+
+</menu>
