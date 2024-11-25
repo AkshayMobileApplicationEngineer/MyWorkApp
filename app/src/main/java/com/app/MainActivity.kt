@@ -1,5 +1,6 @@
 package com.app
 
+import AdsTrackerFragment
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
@@ -33,6 +34,7 @@ class MainActivity : AppCompatActivity() {
             "About" -> AboutFragment()
             "Dashboard" -> DashboardFragment()
             "Retrofit" -> RetrofitFragment()
+            "adstracker" -> AdsTrackerFragment()
             else -> MasterFragment() // Default fragment
         }
 

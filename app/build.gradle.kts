@@ -52,4 +52,12 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
    //implementation ("com.appsflyer:af-android-sdk:6.15.2")
    // implementation (libs.af.android.sdk)
+
+    //page viewer
+    implementation ("androidx.viewpager2:viewpager2:1.0.0")
+
+
+
+    //dots indicator library
+    implementation ("com.tbuonomo:dotsindicator:4.3")
 }

@@ -148,7 +148,7 @@ class MasterFragment : Fragment() {
             .setNegativeButton("Fragment") { _, _ ->
                 // Handle negative button click
                 val itemIntent = Intent(requireActivity(), MainActivity::class.java)
-                itemIntent.putExtra("Display", "Retrofit") // Navigate to HomeFragment
+                itemIntent.putExtra("Display", "adstracker") // Navigate to HomeFragment
                 startActivity(itemIntent)
             }
             .create()
