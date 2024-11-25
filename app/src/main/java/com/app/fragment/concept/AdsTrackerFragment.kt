@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.teampanlogic.R
@@ -92,5 +93,8 @@ class AdsTrackerFragment : Fragment() {
         println("Tracking Data - Impressions: $impressions")
         println("Tracking Data - Clicks: $clicks")
         println("Tracking Data - Unique Users: ${uniqueUsers.size}")
+
+
+        Toast.makeText(requireContext(), "Tracking Data - Impressions: $impressions\nTracking Data - Clicks: $clicks\nTracking Data - Unique Users: ${uniqueUsers.size}", Toast.LENGTH_LONG).show()
     }
 }
