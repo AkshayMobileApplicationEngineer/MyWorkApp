@@ -12,6 +12,7 @@ activity = "1.9.3"
 constraintlayout = "2.2.0"
 navigationFragmentKtx = "2.8.3"
 navigationUiKtx = "2.8.3"
+firebaseInappmessaging = "21.0.1"
 
 [libraries]
 af-android-sdk = { module = "com.appsflyer:af-android-sdk", version.ref = "afAndroidSdk" }
@@ -25,6 +26,7 @@ androidx-activity = { group = "androidx.activity", name = "activity", version.re
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 androidx-navigation-fragment-ktx = { group = "androidx.navigation", name = "navigation-fragment-ktx", version.ref = "navigationFragmentKtx" }
 androidx-navigation-ui-ktx = { group = "androidx.navigation", name = "navigation-ui-ktx", version.ref = "navigationUiKtx" }
+firebase-inappmessaging = { group = "com.google.firebase", name = "firebase-inappmessaging", version.ref = "firebaseInappmessaging" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

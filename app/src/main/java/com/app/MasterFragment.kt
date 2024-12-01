@@ -124,14 +124,19 @@ class MasterFragment : Fragment() {
     }
 
     private fun themeDayNight() {
+        val sharedPreferences = requireActivity().getSharedPreferences("panlogic", AppCompatActivity.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
         val mode = if (requireContext().resources.configuration.uiMode and
                 Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_NO) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            editor.putInt("theme", AppCompatDelegate.MODE_NIGHT_YES)
             R.drawable.ic_night
         } else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            editor.putInt("theme", AppCompatDelegate.MODE_NIGHT_NO)
             R.drawable.ic_mode
         }
+        editor.apply()
         requireActivity().window.statusBarColor = resources.getColor(R.color.appOne)
         val toolbar = requireActivity().findViewById<Toolbar>(R.id.toolbar)
         toolbar.menu.findItem(R.id.action_theme).icon = resources.getDrawable(mode, null)
@@ -144,11 +149,13 @@ class MasterFragment : Fragment() {
             .setPositiveButton("Activity") { _, _ ->
                 // Handle positive button click
                 Toast.makeText(context, "feature coming soon", Toast.LENGTH_SHORT).show()
+                val itemIntent = Intent(requireActivity(), IDActivity::class.java)
+                startActivity(itemIntent)
             }
             .setNegativeButton("Fragment") { _, _ ->
                 // Handle negative button click
                 val itemIntent = Intent(requireActivity(), MainActivity::class.java)
-                itemIntent.putExtra("Display", "adstracker") // Navigate to HomeFragment
+                itemIntent.putExtra("Display", "form") // Navigate to HomeFragment
                 startActivity(itemIntent)
             }
             .create()

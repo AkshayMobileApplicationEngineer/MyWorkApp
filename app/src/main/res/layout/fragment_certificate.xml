@@ -1,0 +1,110 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="24dp"
+        android:gravity="center">
+
+        <!-- Certificate Title -->
+        <TextView
+            android:id="@+id/certificateTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Registration Certificate"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            android:layout_marginBottom="24dp" />
+
+        <!-- Full Name Field -->
+        <TextView
+            android:id="@+id/labelName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Full Name"
+            android:textSize="18sp"
+            android:textColor="#000000"
+            android:layout_marginBottom="8dp" />
+
+        <EditText
+            android:id="@+id/recipientName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter your full name"
+            android:textSize="16sp"
+            android:layout_marginBottom="16dp"
+            android:inputType="textPersonName" />
+
+        <!-- Email Field -->
+        <TextView
+            android:id="@+id/labelEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Email Address"
+            android:textSize="18sp"
+            android:textColor="#000000"
+            android:layout_marginBottom="8dp" />
+
+        <EditText
+            android:id="@+id/emailField"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter your email address"
+            android:textSize="16sp"
+            android:layout_marginBottom="16dp"
+            android:inputType="textEmailAddress" />
+
+        <!-- Registration Date -->
+        <TextView
+            android:id="@+id/labelDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Registration Date"
+            android:textSize="18sp"
+            android:textColor="#000000"
+            android:layout_marginBottom="8dp" />
+
+        <EditText
+            android:id="@+id/registrationDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Select registration date"
+            android:textSize="16sp"
+            android:layout_marginBottom="16dp"
+            android:inputType="date" />
+
+        <!-- Course Name -->
+        <TextView
+            android:id="@+id/labelCourse"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Course Name"
+            android:textSize="18sp"
+            android:textColor="#000000"
+            android:layout_marginBottom="8dp" />
+
+        <EditText
+            android:id="@+id/courseName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter course name"
+            android:textSize="16sp"
+            android:layout_marginBottom="24dp" />
+
+        <!-- Submit Button -->
+        <Button
+            android:id="@+id/submitButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Generate Certificate"
+            android:textSize="18sp"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="#4CAF50"
+            android:textColor="#ffffff" />
+    </LinearLayout>
+</ScrollView>
