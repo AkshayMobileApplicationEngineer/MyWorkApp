@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
             "Retrofit" -> RetrofitFragment()
             "adstracker" -> AdsTrackerFragment()
             "form" -> CertificateFragment()
-            "shareCertificate" -> createCertificateShareFragment()
+            "shareCertificate" ->createCertificateShareFragment()
             else -> MasterFragment() // Default fragment
         }
 
