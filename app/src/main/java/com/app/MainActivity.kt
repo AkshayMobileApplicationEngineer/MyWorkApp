@@ -8,6 +8,9 @@ import android.os.Build
 import androidx.activity.ComponentActivity
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.app.fragment.concept.SplashFragment
+import com.app.room.CollegeIDCardFragment
+import com.example.collegeidcard.RoomFragment
 import com.teampanlogic.R
 
 class MainActivity : AppCompatActivity() {
@@ -32,6 +35,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun navigateToFragment(fragmentName: String) {
         val fragment: Fragment = when (fragmentName) {
+            "master"-> MasterFragment()
             "Home" -> HomeFragment()
             "Example" -> ExampleFragment()
             "About" -> AboutFragment()
@@ -40,7 +44,9 @@ class MainActivity : AppCompatActivity() {
             "adstracker" -> AdsTrackerFragment()
             "form" -> CertificateFragment()
             "shareCertificate" ->createCertificateShareFragment()
-            else -> MasterFragment() // Default fragment
+            "Rooms"-> RoomFragment()
+            "College_Id_Card"-> CollegeIDCardFragment()
+            else -> SplashFragment() // Default fragment
         }
 
         supportFragmentManager.beginTransaction()

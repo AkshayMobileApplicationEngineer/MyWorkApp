@@ -5,10 +5,7 @@ import android.content.res.Configuration
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
-import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AppCompatDelegate
+import androidx.appcompat.app.*
 import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
@@ -25,7 +22,6 @@ class MasterFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // Required for menu integration in fragments
         setHasOptionsMenu(true)
     }
 
@@ -33,63 +29,75 @@ class MasterFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_master, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupUI(view)
+        setupDrawerToggle()
+        setupBottomNavigation()
+        setupDrawerNavigation()
+    }
+
+    private fun setupUI(view: View) {
         activity?.window?.statusBarColor = resources.getColor(R.color.appOne)
-        // Setup Toolbar
         val toolbar = view.findViewById<Toolbar>(R.id.toolbar)
         drawerLayout = view.findViewById(R.id.drawer_layout)
         navigationView = view.findViewById(R.id.navigation_view)
         bottomNavigation = view.findViewById(R.id.bottom_navigation)
 
         (activity as? AppCompatActivity)?.setSupportActionBar(toolbar)
-        toolbar.setBackgroundColor(resources.getColor(R.color.appOne))
-        toolbar.setTitleTextColor(resources.getColor(R.color.white))
-        toolbar.setSubtitleTextColor(resources.getColor(R.color.white))
-        toolbar.title = getString(R.string.app_name)
-        // Setup Drawer Toggle
+        toolbar.apply {
+            setBackgroundColor(resources.getColor(R.color.appOne))
+            setTitleTextColor(resources.getColor(R.color.white))
+            setSubtitleTextColor(resources.getColor(R.color.white))
+            title = getString(R.string.app_name)
+        }
+    }
+
+    private fun setupDrawerToggle() {
         toggle = ActionBarDrawerToggle(
-            requireActivity(), drawerLayout, toolbar,
+            requireActivity(), drawerLayout, requireActivity().findViewById(R.id.toolbar),
             R.string.drawer_open, R.string.drawer_close
         )
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
+    }
 
-        // Setup Bottom Navigation
-        bottomNavigation.itemIconTintList = null
-        bottomNavigation.alpha = 0f
-        bottomNavigation.menu.getItem(0).isChecked = true
-
-        bottomNavigation.setBackgroundColor(resources.getColor(R.color.appOne))
-        bottomNavigation.alpha = 1f
-
-        bottomNavigation.setOnItemSelectedListener { item ->
-            when (item.itemId) {
-                R.id.nav_home -> loadFragment(ChildFragment.newInstance("Home"))
-                R.id.nav_dashboard -> loadFragment(ChildFragment.newInstance("Dashboard"))
-                R.id.nav_notifications -> loadFragment(ChildFragment.newInstance("Notifications"))
+    private fun setupBottomNavigation() {
+        bottomNavigation.apply {
+            itemIconTintList = null
+            alpha = 1f
+            setBackgroundColor(resources.getColor(R.color.appOne))
+            setOnItemSelectedListener { item ->
+                when (item.itemId) {
+                    R.id.nav_home -> loadFragment(ChildFragment.newInstance("Home"))
+                    R.id.nav_dashboard -> loadFragment(ChildFragment.newInstance("Dashboard"))
+                    R.id.nav_notifications -> loadFragment(ChildFragment.newInstance("Notifications"))
+                }
+                true
             }
-            true
         }
+    }
 
-        // Setup Drawer Navigation
+    private fun setupDrawerNavigation() {
         navigationView.setNavigationItemSelectedListener { item ->
             when (item.itemId) {
-                R.id.drawer_home -> {
-                    val itemIntent = Intent(requireActivity(), MainActivity::class.java)
-                    itemIntent.putExtra("Display", "Home") // Navigate to HomeFragment
-                    startActivity(itemIntent)
-                }
+                R.id.drawer_home -> loadFragment(ChildFragment.newInstance("Home"))
                 R.id.drawer_settings -> loadFragment(ChildFragment.newInstance("Settings"))
-                R.id.drawer_about -> loadFragment(ChildFragment.newInstance("About"))
+                R.id.drawer_about -> startMainActivity("About")
+                R.id.drawer_rooms -> startMainActivity("Rooms")
             }
             drawerLayout.closeDrawers()
             true
         }
+    }
+
+    private fun startMainActivity(display: String) {
+        val itemIntent = Intent(requireActivity(), MainActivity::class.java)
+        itemIntent.putExtra("Display", display)
+        startActivity(itemIntent)
     }
 
     private fun loadFragment(fragment: Fragment) {
@@ -105,17 +113,12 @@ class MasterFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
-            R.id.action_search -> {
-                // Handle search action
-                true
-            }
+            R.id.action_search -> true
             R.id.action_plus -> {
-                // Handle plus action
                 dialogPlus()
                 true
             }
             R.id.action_theme -> {
-                // Handle theme action
                 themeDayNight()
                 true
             }
@@ -138,8 +141,8 @@ class MasterFragment : Fragment() {
         }
         editor.apply()
         requireActivity().window.statusBarColor = resources.getColor(R.color.appOne)
-        val toolbar = requireActivity().findViewById<Toolbar>(R.id.toolbar)
-        toolbar.menu.findItem(R.id.action_theme).icon = resources.getDrawable(mode, null)
+        requireActivity().findViewById<Toolbar>(R.id.toolbar).menu.findItem(R.id.action_theme).icon =
+            resources.getDrawable(mode, null)
     }
 
     private fun dialogPlus() {
@@ -147,16 +150,11 @@ class MasterFragment : Fragment() {
             .setTitle("Add Activity or Fragment")
             .setMessage("We can add activity or fragment")
             .setPositiveButton("Activity") { _, _ ->
-                // Handle positive button click
                 Toast.makeText(context, "feature coming soon", Toast.LENGTH_SHORT).show()
-                val itemIntent = Intent(requireActivity(), IDActivity::class.java)
-                startActivity(itemIntent)
+                startActivity(Intent(requireActivity(), IDActivity::class.java))
             }
             .setNegativeButton("Fragment") { _, _ ->
-                // Handle negative button click
-                val itemIntent = Intent(requireActivity(), MainActivity::class.java)
-                itemIntent.putExtra("Display", "form") // Navigate to HomeFragment
-                startActivity(itemIntent)
+                startMainActivity("form")
             }
             .create()
             .show()
